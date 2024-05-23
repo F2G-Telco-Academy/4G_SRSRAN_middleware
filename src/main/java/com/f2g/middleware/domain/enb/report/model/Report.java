@@ -38,15 +38,5 @@ public class Report {
         @JsonProperty("cell_container")
         private CellContainer cellContainer;
 
-        public static class CellContainer {
-            @JsonProperty("carrier_id")
-            private Integer carrierId;
-            @JsonProperty("pci")
-            private Integer pci;
-            @JsonProperty("nof_rach")
-            private Integer nofRach;
-            @JsonProperty("ue_list")
-            private List<Object> ueList;
-        }
     }
 }

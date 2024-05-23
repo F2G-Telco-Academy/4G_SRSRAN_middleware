@@ -11,4 +11,15 @@ public class EventData {
     private String cellIdentity;
     @JsonProperty("sib9_home_enb_name")
     private String sib9HomeEnbName;
+    @JsonProperty("rnti")
+    private Integer rnti;
+    @JsonProperty("asn1_length")
+    private Integer asn1Length;
+    @JsonProperty("asn1_message")
+    private String asn1Message;
+    @JsonProperty("asn1_type")
+    private Integer asn1Type;
+    @JsonProperty("additional")
+    private Integer additional;
+
 }
