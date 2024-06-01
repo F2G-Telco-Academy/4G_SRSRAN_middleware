@@ -1,11 +1,9 @@
 package com.f2g.middleware.core.controller;
 
+import com.f2g.middleware.core.enums.ConfigEnum;
 import com.f2g.middleware.core.service.ConfigFileService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -18,38 +16,43 @@ public class ConfigFileController {
 
     private ConfigFileService configFileService;
 
-    @GetMapping("/enb-config")
-    public Map<String, String> getEnbConfig() {
-        return configFileService.getEnbConfig();
+    @GetMapping("/enb-config/{configEnum}")
+    public Map<String, String> getEnbConfig(@PathVariable ConfigEnum configEnum) {
+        return configFileService.getEnbConfig(configEnum);
     }
 
-    @GetMapping("/epc-config")
-    public Map<String, String> getEpcConfig() {
-        return configFileService.getEpcConfig();
+    @GetMapping("/epc-config/{configEnum}")
+    public Map<String, String> getEpcConfig(@PathVariable ConfigEnum configEnum) {
+        return configFileService.getEpcConfig(configEnum);
     }
 
-    @GetMapping("/mbms-config")
-    public Map<String, String> getMbmsConfig() {
-        return configFileService.getMbmsConfig();
+    @GetMapping("/mbms-config/{configEnum}")
+    public Map<String, String> getMbmsConfig(@PathVariable ConfigEnum configEnum) {
+        return configFileService.getMbmsConfig(configEnum);
     }
 
-    @GetMapping("/rb-config")
-    public Map<String, String> getRbConfig() {
-        return configFileService.getRbConfig();
+    @GetMapping("/rb-config/{configEnum}")
+    public Map<String, String> getRbConfig(@PathVariable ConfigEnum configEnum) {
+        return configFileService.getRbConfig(configEnum);
     }
 
-    @GetMapping("/rr-config")
-    public Map<String, String> getRrConfig() {
-        return configFileService.getRrConfig();
+    @GetMapping("/rr-config/{configEnum}")
+    public Map<String, String> getRrConfig(@PathVariable ConfigEnum configEnum) {
+        return configFileService.getRrConfig(configEnum);
     }
 
-    @GetMapping("/sib-config")
-    public Map<String, String> getSibConfig() {
-        return configFileService.getSibConfig();
+    @GetMapping("/sib-config/{configEnum}")
+    public Map<String, String> getSibConfig(@PathVariable ConfigEnum configEnum) {
+        return configFileService.getSibConfig(configEnum);
     }
 
-    @GetMapping("/ue-config")
-    public Map<String, String> getUeConfig() {
-        return configFileService.getUeConfig();
+    @GetMapping("/ue-config/{configEnum}")
+    public Map<String, String> getUeConfig(@PathVariable ConfigEnum configEnum) {
+        return configFileService.getUeConfig(configEnum);
+    }
+
+    @PostMapping("epc-config")
+    public Map<String, String> updateEpcConfig(@RequestBody Map<String, String> config) {
+        return configFileService.updateEpcConfig(config);
     }
 }

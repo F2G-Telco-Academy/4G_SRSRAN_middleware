@@ -109,7 +109,7 @@ public class ReportService {
         Map<String, String> config;
 
         try {
-            config = Utilities.extractConfigValues((enbConfigFIle.getURI().getPath()));
+            config = Utilities.extractAllConfigValues((enbConfigFIle.getURI().getPath()));
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
