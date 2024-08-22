@@ -1,5 +1,6 @@
 package com.f2g.middleware.domain.enb.report.service;
 
+import com.f2g.middleware.core.utils.Utilities;
 import com.f2g.middleware.domain.enb.report.model.Report;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -7,26 +8,30 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
 public class ReportService {
 
     @Value("file:${enb_report.file.path}")
-    private Resource jsonFile;
+    private Resource enbReportJsonFile;
 
-    public List<Report> getReport() {
+    @Value("file:${enb_config.file.path}")
+    private Resource enbConfigFIle;
+
+
+    public List<Report> getReportList() {
         ObjectMapper mapper = new ObjectMapper();
         List<Report> reports = new ArrayList<>();
 
         try {
-            String content = new String(Files.readAllBytes(Paths.get(jsonFile.getURI())));
+            String content = new String(Files.readAllBytes(Paths.get(enbReportJsonFile.getURI())));
             String[] jsons = content.split("(?<=})\\s+(?=\\{)");
 
             for (String json : jsons) {
@@ -45,7 +50,7 @@ public class ReportService {
         ObjectMapper mapper = new ObjectMapper();
         Report lastReport = new Report();
 
-        try (RandomAccessFile raf = new RandomAccessFile(jsonFile.getFile(), "r")) {
+        try (RandomAccessFile raf = new RandomAccessFile(enbReportJsonFile.getFile(), "r")) {
             long fileLength = raf.length() - 1;
             StringBuilder sb = new StringBuilder();
             int openBracesCount = 0;
@@ -99,6 +104,19 @@ public class ReportService {
         return lastReport;
     }
 
+    public Map<String, String> getEnbConfig() {
+
+        Map<String, String> config;
+
+        try {
+            config = Utilities.extractAllConfigValues((enbConfigFIle.getURI().getPath()));
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+
+        return config;
+
+    }
 
 
 }

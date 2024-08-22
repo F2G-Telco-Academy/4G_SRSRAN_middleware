@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -20,11 +21,16 @@ public class EnbReportController {
 
     @GetMapping("/reports")
     public List<Report> getReports() {
-        return reportService.getReport();
+        return reportService.getReportList();
     }
 
     @GetMapping("/last-report")
     public Report getLastReport() {
         return reportService.getLastReport();
+    }
+
+    @GetMapping("/enb-config")
+    public Map<String, String> getEnbConfig(){
+        return reportService.getEnbConfig();
     }
 }

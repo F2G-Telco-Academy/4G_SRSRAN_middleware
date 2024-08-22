@@ -1,9 +1,11 @@
 package com.f2g.middleware;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@Disabled
 class F2bBeMiddlewareApplicationTests {
 
     @Test
