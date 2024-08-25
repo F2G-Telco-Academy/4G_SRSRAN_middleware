@@ -46,7 +46,7 @@ public class ConfigService {
     }
 
     // Helper Methods
-    private List<ConfigObjectDTO> getConfigObjects(String configPath) throws IOException {
+    List<ConfigObjectDTO> getConfigObjects(String configPath) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(configPath));
         List<ConfigObjectDTO> configObjects = new ArrayList<>();
         String currentSection = "";
@@ -77,7 +77,7 @@ public class ConfigService {
         return configObjects;
     }
 
-    private void updateConfigObject(String configPath, ConfigObjectDTO configObjectDTO) throws IOException {
+    void updateConfigObject(String configPath, ConfigObjectDTO configObjectDTO) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(configPath));
         boolean found = false;
 
