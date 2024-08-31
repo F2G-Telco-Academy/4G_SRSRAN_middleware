@@ -70,7 +70,7 @@ public class ConfigService {
                 if (!isActive) {
                     label = label.substring(1);
                 }
-                configObjects.add(new ConfigObjectDTO(label, value, isActive, configPath, currentSection));
+                configObjects.add(new ConfigObjectDTO(label, value, isActive, removePrefix(configPath), currentSection));
             }
         }
 
@@ -118,6 +118,14 @@ public class ConfigService {
         }
 
         Files.write(Paths.get(configPath), lines);
+    }
+
+    public static String removePrefix(String path) {
+        if (path.startsWith(CONFIG_DIR)) {
+            return path.substring(CONFIG_DIR.length());
+        } else {
+            return path;
+        }
     }
 
 }
