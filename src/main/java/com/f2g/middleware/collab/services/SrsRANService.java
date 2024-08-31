@@ -16,11 +16,11 @@ public class SrsRANService {
     private static final long TIMEOUT_SECONDS = 10;
 
     public String startEPC() throws IOException, InterruptedException {
-        return asyncExecuteCommand(SRSRAN_BUILD_DIR + " && nohup sudo ./srsepc/src/srsepc ~/.config/srsran/epc.conf");
+        return asyncExecuteCommand(SRSRAN_BUILD_DIR + " && nohup sudo ./srsepc/src/srsepc /home/salam/.config/srsran/epc.conf");
     }
 
     public String startENB() throws IOException, InterruptedException {
-        return asyncExecuteCommand(SRSRAN_BUILD_DIR + " && nohup sudo ./srsenb/src/srsenb ~/.config/srsran/enb.conf");
+        return asyncExecuteCommand(SRSRAN_BUILD_DIR + " && nohup sudo ./srsenb/src/srsenb /home/salam/.config/srsran/enb.conf");
     }
 
     public String startUE() throws IOException, InterruptedException {
